@@ -17,11 +17,10 @@ class Landing extends Component {
           <div className="container">
             <div className="row">
               <div className="col-md-12 text-center">
-                <h1 className="display-3 mb-4">DEVELOPERS NETWORK</h1>
+                <h1 className="display-3 mb-4">Donation Tracker</h1>
                 <p className="lead mb-3">
                   {' '}
-                  Create a developer profile/portfolio, share posts and get help
-                  from other developers
+                  Data Management Platform for Donation
                 </p>
                 <hr />
                 <Link to="/register" className="btn btn-lg btn-light mr-2">
