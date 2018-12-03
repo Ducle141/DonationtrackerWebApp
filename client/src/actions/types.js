@@ -16,3 +16,13 @@ export const GET_ISSUES = 'GET_ISSUES';
 export const GET_ISSUE = 'GET_ISSUE';
 export const ADD_ISSUE = 'ADD_ISSUE';
 export const DELETE_ISSUE = 'DELETE_ISSUE';
+
+// Location
+export const GET_LOCATIONS = 'GET_LOCATIONS';
+export const LOCATION_LOADING = 'LOCATION_LOADING';
+
+// Item
+export const ADD_ITEMS = 'ADD_ITEMS';
+export const GET_ITEM = 'GET_ITEM';
+export const GET_ITEMS = 'GET_ITEMS';
+export const ITEM_LOADING = 'ITEM_LOADING';
