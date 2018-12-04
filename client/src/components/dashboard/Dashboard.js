@@ -55,7 +55,12 @@ class Dashboard extends Component {
           <div className="row">
             <div className="col-md-12">
               <h1 className="display-4">Dashboard</h1>
-              <p className="lead text-muted">Welcome {user.email}</p>
+              <p className="lead text-muted">Welcome {user.email}</p>{' '}
+              {user.userType === 'Employee' ? (
+                <p className="lead text-muted">Location {user.location}</p>
+              ) : (
+                ''
+              )}
               {userContent}
             </div>
           </div>
