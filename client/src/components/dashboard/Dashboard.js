@@ -9,9 +9,13 @@ import { connect } from 'react-redux';
 import Locations from '../locations/Locations';
 import Items from '../items/Items';
 // import AddItem from '../add-item/AddItem';
+import LocationsMapContainer from '../map/LocationsMapContainer';
+import { getLocations } from '../../actions/locationActions';
 
 class Dashboard extends Component {
-  componentDidMount() {}
+  componentDidMount() {
+    this.props.getLocations();
+  }
 
   onDeleteClick(e) {
     this.props.deleteAccount();
@@ -20,11 +24,26 @@ class Dashboard extends Component {
   render() {
     const { user } = this.props.auth;
     // const { profile, loading } = this.props.profile;
-
+    const { locations } = this.props.locations;
+    console.log('test Dashbaord');
+    console.log(locations);
     let userContent;
 
     if (user.userType == 'User') {
-      userContent = <Items />;
+      userContent = (
+        <div className="btn-group mb-4" role="group">
+          <div className="col-md-12">
+            <div className="row">
+              <Items />
+            </div>
+            <div className="row">
+              {locations !== null && locations !== undefined ? (
+                <LocationsMapContainer locations={locations} />
+              ) : null}
+            </div>
+          </div>
+        </div>
+      );
     } else if (user.userType == 'Employee') {
       userContent = (
         <div className="btn-group mb-4" role="group">
@@ -68,18 +87,21 @@ class Dashboard extends Component {
 }
 
 Dashboard.propTypes = {
-  // getCurrentProfile: PropTypes.func.isRequired,
+  getLocations: PropTypes.func.isRequired,
   // deleteAccount: PropTypes.func.isRequired,
+  location: PropTypes.object.isRequired,
   auth: PropTypes.object.isRequired
   // profile: PropTypes.object.isRequired
 };
 
 const mapStateToProps = state => ({
   // profile: state.profile,
+  locations: state.location,
   auth: state.auth
 });
 
 export default connect(
-  mapStateToProps
+  mapStateToProps,
   // { getCurrentProfile, deleteAccount }
+  { getLocations }
 )(Dashboard);
