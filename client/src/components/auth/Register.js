@@ -82,7 +82,7 @@ class Register extends Component {
       console.log(locations);
 
       locations.map(loc => {
-        locationValues.push({ label: loc.name, value: loc._id });
+        locationValues.push({ label: loc.name, value: loc.name });
       });
     } else {
       console.log(locations);

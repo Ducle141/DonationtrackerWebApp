@@ -70,7 +70,6 @@ class AddItem extends Component {
     let locationValues = [];
     if (locations !== null && locations !== undefined && locations.length > 0) {
       console.log(locations);
-
       locations.map(loc => {
         locationValues.push({ label: loc.name, value: loc.name });
       });
