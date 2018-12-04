@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-// import { getCurrentProfile, deleteAccount } from '../../actions/profileActions';
+
 // import Spinner from '../common/Spinner';
 // import ProfileActions from './ProfileActions';
 
@@ -11,10 +11,7 @@ import Items from '../items/Items';
 // import AddItem from '../add-item/AddItem';
 
 class Dashboard extends Component {
-  componentDidMount() {
-    // this.props.getCurrentProfile();
-    // TODO: this.props.getRole();
-  }
+  componentDidMount() {}
 
   onDeleteClick(e) {
     this.props.deleteAccount();
