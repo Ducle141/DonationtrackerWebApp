@@ -25,9 +25,7 @@ class Dashboard extends Component {
 
     let userContent;
 
-    if (user.userType == 'User') {
-      userContent = <Locations />;
-    } else if (user.userType == 'Employee') {
+    if (user.userType == 'User' || user.userType == 'Employee') {
       userContent = <Items />;
     } else {
       userContent = <Locations />;

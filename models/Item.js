@@ -7,7 +7,7 @@ const ItemSchema = new Schema({
     type: String,
     required: true
   },
-  location: {
+  locationS: {
     type: Schema.Types.ObjectId,
     ref: 'locations'
   },

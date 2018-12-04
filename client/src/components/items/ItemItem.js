@@ -17,7 +17,7 @@ class ItemItem extends Component {
             <p>{item.longDescription} </p>
           </div>
           <div className="col-md-4 d-none d-md-block">
-            <h4>Located at: {item.location} </h4>
+            <h4>Located at: {item.locationS} </h4>
             <p>Time: {item.timestamp}</p>
           </div>
           <div className="col-md-4 d-none d-md-block">

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 import Spinner from '../common/Spinner';
-import { getItem } from '../../actions/itemActions';
+import { getItem, getItems } from '../../actions/itemActions';
 import ItemItem from './ItemItem';
 
 class Items extends Component {
@@ -11,8 +11,13 @@ class Items extends Component {
     console.log('items did mount');
 
     const { user } = this.props.auth;
-    console.log(user.location);
-    this.props.getItem(user.location);
+
+    console.log(user);
+    if (user.userType === 'Employee') {
+      this.props.getItem(user.location);
+    } else {
+      this.props.getItems();
+    }
   }
 
   render() {
@@ -52,6 +57,7 @@ class Items extends Component {
 
 Items.propTypes = {
   getItem: PropTypes.func.isRequired,
+  getItems: PropTypes.func.isRequired,
   item: PropTypes.object.isRequired,
   auth: PropTypes.object.isRequired
 };
@@ -63,5 +69,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { getItem }
+  { getItem, getItems }
 )(Items);

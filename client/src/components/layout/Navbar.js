@@ -15,6 +15,16 @@ class Navbar extends Component {
   render() {
     const { isAuthenticated, user } = this.props.auth;
 
+    const storeDisplay = (
+      <ul className="navbar-nav ml-auto">
+        <li className="nav-item">
+          <Link className="nav-link" to="/locations">
+            Store Locations
+          </Link>
+        </li>
+      </ul>
+    );
+
     const authLinks = (
       <ul className="navbar-nav ml-auto">
         {/* <li className="nav-item ">
@@ -80,7 +90,7 @@ class Navbar extends Component {
           >
             <span className="navbar-toggler-icon" />
           </button>
-
+          {user.userType === 'User' ? storeDisplay : ''}
           <div className="collapse navbar-collapse" id="mobile-nav">
             <ul className="navbar-nav mr-auto">
               <li className="nav-item">

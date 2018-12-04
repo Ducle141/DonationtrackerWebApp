@@ -32,13 +32,11 @@ router.get('/', (req, res) => {
 // @desc    Get item by id
 // @access  Public
 router.get('/:id', (req, res) => {
-  console.log('get with', req.params.id);
-
-  Item.find()
-    .select({ location: req.params.id })
+  // console.log('get with', req.params.id);
+  let result;
+  Item.find({ locationS: req.params.id })
     .then(items => {
       res.json(items);
-      console.log(items);
     })
     .catch(err =>
       res.status(404).json({ noitemfound: 'No item found with that ID' })
