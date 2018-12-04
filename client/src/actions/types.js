@@ -22,7 +22,7 @@ export const GET_LOCATIONS = 'GET_LOCATIONS';
 export const LOCATION_LOADING = 'LOCATION_LOADING';
 
 // Item
-export const ADD_ITEMS = 'ADD_ITEMS';
+export const ADD_ITEM = 'ADD_ITEM';
 export const GET_ITEM = 'GET_ITEM';
 export const GET_ITEMS = 'GET_ITEMS';
 export const ITEM_LOADING = 'ITEM_LOADING';

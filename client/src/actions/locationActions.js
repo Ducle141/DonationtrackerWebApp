@@ -7,7 +7,8 @@ export const getLocations = () => dispatch => {
   dispatch(setLocationLoading());
   console.log('getting locations');
   axios
-    .get('/api/locations/all')
+    // .get('/api/locations/all')
+    .get('/location')
     .then(res =>
       dispatch({
         type: GET_LOCATIONS,

@@ -16,7 +16,7 @@ import Landing from './components/layout/Landing';
 import Register from './components/auth/Register';
 import Login from './components/auth/Login';
 import Dashboard from './components/dashboard/Dashboard';
-import CreateProfile from './components/create-profile/CreateProfile';
+import AddItem from './components/add-item/AddItem';
 
 import Locations from './components/locations/Locations';
 
@@ -68,11 +68,7 @@ class App extends Component {
                 <PrivateRoute exact path="/dashboard" component={Dashboard} />
               </Switch>
               <Switch>
-                <PrivateRoute
-                  exact
-                  path="/create-profile"
-                  component={CreateProfile}
-                />
+                <PrivateRoute exact path="/add-item" component={AddItem} />
               </Switch>
 
               <Route exact path="/not-found" component={NotFound} />

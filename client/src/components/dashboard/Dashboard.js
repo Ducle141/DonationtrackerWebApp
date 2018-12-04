@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-// import { Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 // import { getCurrentProfile, deleteAccount } from '../../actions/profileActions';
@@ -8,6 +8,7 @@ import { connect } from 'react-redux';
 
 import Locations from '../locations/Locations';
 import Items from '../items/Items';
+// import AddItem from '../add-item/AddItem';
 
 class Dashboard extends Component {
   componentDidMount() {
@@ -25,8 +26,25 @@ class Dashboard extends Component {
 
     let userContent;
 
-    if (user.userType == 'User' || user.userType == 'Employee') {
+    if (user.userType == 'User') {
       userContent = <Items />;
+    } else if (user.userType == 'Employee') {
+      userContent = (
+        <div className="btn-group mb-4" role="group">
+          <div className="col-md-12">
+            <div className="row">
+              <Link to="/add-item" className="btn btn-light">
+                <i className="fas fa-hand-holding-usd text-secondary mr-1" />
+                Add Item
+              </Link>
+            </div>
+
+            <div className="row">
+              <Items />
+            </div>
+          </div>
+        </div>
+      );
     } else {
       userContent = <Locations />;
     }

@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 import {
-  // GET_ERRORS,
+  GET_ERRORS,
   ADD_ITEM,
   CLEAR_ERRORS,
   GET_ITEM,
@@ -10,24 +10,24 @@ import {
   // DELETE_POST
 } from './types';
 
-// // Add Item
-// export const addItem = itemData => dispatch => {
-//   dispatch(clearErrors());
-//   axios
-//     .post('/api/items', itemData)
-//     .then(res =>
-//       dispatch({
-//         type: ADD_ITEM,
-//         payload: res.data
-//       })
-//     )
-//     .catch(err =>
-//       dispatch({
-//         type: GET_ERRORS,
-//         payload: err.response.data
-//       })
-//     );
-// };
+// Add Item
+export const addItem = itemData => dispatch => {
+  dispatch(clearErrors());
+  axios
+    .post('/api/items', itemData)
+    .then(res =>
+      dispatch({
+        type: ADD_ITEM,
+        payload: res.data
+      })
+    )
+    .catch(err =>
+      dispatch({
+        type: GET_ERRORS,
+        payload: err.response.data
+      })
+    );
+};
 
 // Get All Items
 export const getItems = () => dispatch => {
