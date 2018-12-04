@@ -1,12 +1,9 @@
-
-
-
 .fuzzy-picker-background {
   /* background: rgba(0, 0, 0, 0.2); */
   position: fixed;
   top: 190px;
   /* bottom: 1; */
-  left: 1350px;
+  right: 450px;
   /* right: 500px; */
   display: inline-block;
   align-items: flex-start;
