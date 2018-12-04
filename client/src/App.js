@@ -61,15 +61,16 @@ class App extends Component {
               <Route exact path="/locations" component={Locations} />
               {/* <Route exact path="/location/:id" component={Location} /> */}
               <Route exact path="/items" component={Items} />
+              <Route exact path="/add-item" component={AddItem} />
               {/* <Route exact path="/item/:id" component={Item} /> */}
               {/* <Route exact path="/profiles" component={Profiles} /> */}
 
               <Switch>
                 <PrivateRoute exact path="/dashboard" component={Dashboard} />
               </Switch>
-              <Switch>
+              {/* <Switch>
                 <PrivateRoute exact path="/add-item" component={AddItem} />
-              </Switch>
+              </Switch> */}
 
               <Route exact path="/not-found" component={NotFound} />
             </div>

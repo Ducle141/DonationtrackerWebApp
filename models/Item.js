@@ -7,11 +7,15 @@ const ItemSchema = new Schema({
     type: String,
     required: true
   },
-  locationS: {
-    type: Schema.Types.ObjectId,
-    ref: 'locations'
+  location: {
+    // type: Schema.Types.ObjectId,
+    // ref: 'locations'
+    type: String,
+    required: true
   },
   category: {
+    // type: Schema.Types.ObjectId,
+    // ref: 'categories'
     type: String,
     required: true
   },

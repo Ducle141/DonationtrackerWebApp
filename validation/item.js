@@ -33,12 +33,12 @@ module.exports = function validateItemInput(data) {
   }
 
   if (Validator.isEmpty(data.location)) {
-    errors.value = 'Value field is required';
-  }
-
-  if (Validator.isEmpty(data.value)) {
     errors.location = 'Location field is required';
   }
+
+  // if (Validator.isEmpty(data.value)) {
+  //   errors.location = 'Value field is required';
+  // }
 
   return {
     errors,

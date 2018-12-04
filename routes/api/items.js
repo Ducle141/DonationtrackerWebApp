@@ -4,15 +4,31 @@ const mongoose = require('mongoose');
 const passport = require('passport');
 
 const Item = require('../../models/Item');
+const Category = require('../../models/Category');
 // const Profile = require('../../models/Profile');
 
-// Validation
-// const validatePostInput = require('../../validation/post');
+// Load Input Validation
+const validateItemInput = require('../../validation/item');
 
 // @route   GET api/items/test
 // @desc    Tests items route
 // @access  Public
 router.get('/test', (req, res) => res.json({ msg: 'Items Works' }));
+
+// @route   GET api/categories
+// @desc    Get categories
+// @access  Public
+router.get('/', (req, res) => {
+  console.log('get Categories backend');
+  Category.find()
+    .sort({ date: -1 })
+    .then(categories => {
+      res.json(categories);
+    })
+    .catch(err =>
+      res.status(404).json({ nocategoriesfound: 'No categories found' })
+    );
+});
 
 // @route   GET api/items
 // @desc    Get items
@@ -36,7 +52,7 @@ router.get('/:id', (req, res) => {
 
   console.log('get with certain ID', req.params.id);
 
-  Item.find({ locationS: req.params.id })
+  Item.find({ location: req.params.id })
     .then(items => {
       console.log('PASSING BACK THE ITEM');
       console.log(items);
@@ -49,30 +65,28 @@ router.get('/:id', (req, res) => {
 
 // @route   POST api/items
 // @desc    Create item
-// @access  Private
-router.post(
-  '/',
-  passport.authenticate('jwt', { session: false }),
-  (req, res) => {
-    const { errors, isValid } = validateItemInput(req.body);
+// @access  Public
+router.post('/create', (req, res) => {
+  console.log('add item api');
+  const { errors, isValid } = validateItemInput(req.body);
 
-    // Check Validation
-    if (!isValid) {
-      // If any errors, send 400 with errors object
-      return res.status(400).json(errors);
-    }
-
-    const newItem = new Item({
-      description: req.body.description,
-      longDescription: req.body.longDescription,
-      location: req.body.location,
-      category: req.body.category,
-      value: req.body.value
-    });
-
-    newItem.save().then(item => res.json(item));
+  // Check Validation
+  if (!isValid) {
+    console.log('item is invalid');
+    return res.status(400).json(errors);
   }
-);
+
+  console.log('item valid');
+  const newItem = new Item({
+    description: req.body.description,
+    longDescription: req.body.longDescription,
+    location: req.body.location,
+    category: req.body.category,
+    value: req.body.value
+  });
+
+  newItem.save().then(item => res.json(item));
+});
 
 // // @route   DELETE api/posts/:id
 // // @desc    Delete post

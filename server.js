@@ -40,6 +40,7 @@ app.use('/api/profile', profile);
 app.use('/api/posts', posts);
 app.use('/api/locations', locations);
 app.use('/api/items', items);
+app.use('/api/categories', items);
 
 // Server static assets if in production
 if (process.env.NODE_ENV === 'production') {

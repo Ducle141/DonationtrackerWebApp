@@ -6,24 +6,32 @@ import TextFieldGroup from '../common/TextFieldGroup';
 import TextAreaFieldGroup from '../common/TextAreaFieldGroup';
 import InputGroup from '../common/InputGroup';
 import SelectListGroup from '../common/SelectListGroup';
-import { addItem } from '../../actions/itemActions';
+import { addItem, getCategories } from '../../actions/itemActions';
+import { getLocations } from '../../actions/locationActions';
 
 class AddItem extends Component {
-  constructor(props) {
-    super(props);
+  constructor() {
+    super();
     this.state = {
-      // displaySocialInputs: false,
-
       description: '',
       longDescription: '',
-      locationS: '',
+      location: '',
       category: '',
-      value: '',
+      value: 0.0,
       errors: {}
     };
 
     this.onChange = this.onChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
+  }
+  componentDidMount() {
+    // if (this.props.auth.isAuthenticated) {
+    //   this.props.history.push('/dashboard');
+    // }
+    console.log('component did mount');
+
+    this.props.getLocations();
+    this.props.getCategories();
   }
 
   componentWillReceiveProps(nextProps) {
@@ -38,11 +46,12 @@ class AddItem extends Component {
     const itemData = {
       description: this.state.description,
       longDescription: this.state.longDescription,
-      locationS: this.state.locationS,
+      location: this.state.location,
       category: this.state.category,
       value: this.state.value
     };
-
+    console.log('adding item on submit');
+    console.log(itemData);
     this.props.addItem(itemData, this.props.history);
   }
 
@@ -53,73 +62,40 @@ class AddItem extends Component {
   render() {
     const { errors } = this.state;
 
-    // let socialInputs;
-
-    // if (displaySocialInputs) {
-    //   socialInputs = (
-    //     <div>
-    //       <InputGroup
-    //         placeholder="Twitter Profile URL"
-    //         name="twitter"
-    //         icon="fab fa-twitter"
-    //         value={this.state.twitter}
-    //         onChange={this.onChange}
-    //         error={errors.twitter}
-    //       />
-
-    //       <InputGroup
-    //         placeholder="Facebook Page URL"
-    //         name="facebook"
-    //         icon="fab fa-facebook"
-    //         value={this.state.facebook}
-    //         onChange={this.onChange}
-    //         error={errors.facebook}
-    //       />
-
-    //       <InputGroup
-    //         placeholder="Linkedin Profile URL"
-    //         name="linkedin"
-    //         icon="fab fa-linkedin"
-    //         value={this.state.linkedin}
-    //         onChange={this.onChange}
-    //         error={errors.linkedin}
-    //       />
-
-    //       <InputGroup
-    //         placeholder="YouTube Channel URL"
-    //         name="youtube"
-    //         icon="fab fa-youtube"
-    //         value={this.state.youtube}
-    //         onChange={this.onChange}
-    //         error={errors.youtube}
-    //       />
-
-    //       <InputGroup
-    //         placeholder="Instagram Page URL"
-    //         name="instagram"
-    //         icon="fab fa-instagram"
-    //         value={this.state.instagram}
-    //         onChange={this.onChange}
-    //         error={errors.instagram}
-    //       />
-    //     </div>
-    //   );
-    // }
-
     // Select options for status
-    const categoryOptions = [
-      { label: '* Select Professional Status', value: 0 },
-      { label: 'Developer', value: 'Developer' },
-      { label: 'Junior Developer', value: 'Junior Developer' },
-      { label: 'Senior Developer', value: 'Senior Developer' },
-      { label: 'Manager', value: 'Manager' },
-      { label: 'Student or Learning', value: 'Student or Learning' },
-      { label: 'Instructor or Teacher', value: 'Instructor or Teacher' },
-      { label: 'Intern', value: 'Intern' },
-      { label: 'Other', value: 'Other' }
-    ];
 
-    const locationOptions = [];
+    const { categories } = this.props.category;
+    const { locations } = this.props.location;
+
+    let locationValues = [];
+    if (locations !== null && locations !== undefined && locations.length > 0) {
+      console.log(locations);
+
+      locations.map(loc => {
+        locationValues.push({ label: loc.name, value: loc.name });
+      });
+    } else {
+      console.log(locations);
+      console.log('-------------------------');
+      locationValues.push({ label: 'No available location', value: 0 });
+    }
+
+    let categoryOptions = [];
+    if (
+      categories !== null &&
+      categories !== undefined &&
+      categories.length > 0
+    ) {
+      console.log(categories);
+
+      categories.map(ca => {
+        categoryOptions.push({ label: ca.name, value: ca.name });
+      });
+    } else {
+      console.log(categories);
+      console.log('-------------------------');
+      categoryOptions.push({ label: 'No available category', value: 0 });
+    }
 
     return (
       <div className="add-item-">
@@ -127,9 +103,7 @@ class AddItem extends Component {
           <div className="row">
             <div className="col-md-8 m-auto">
               <h1 className="display-4 text-center">Add New Item</h1>
-              {/* <p className="lead text-center">
-                Let's get some information to make your profile stand out
-              </p> */}
+
               <small className="d-block pb-3">* = required fields</small>
               <form onSubmit={this.onSubmit}>
                 <TextFieldGroup
@@ -164,7 +138,7 @@ class AddItem extends Component {
                   name="location"
                   value={this.state.location}
                   onChange={this.onChange}
-                  options={locationOptions}
+                  options={locationValues}
                   error={errors.location}
                   info="Store Location"
                 />
@@ -193,16 +167,25 @@ class AddItem extends Component {
 }
 
 AddItem.propTypes = {
+  addItem: PropTypes.func.isRequired,
+  getCategories: PropTypes.func.isRequired,
+  getLocations: PropTypes.func.isRequired,
   item: PropTypes.object.isRequired,
-  errors: PropTypes.object.isRequired
+  category: PropTypes.object.isRequired,
+  location: PropTypes.object.isRequired,
+  auth: PropTypes.object.isRequired,
+  errors: PropTypes.string.isRequired
 };
 
 const mapStateToProps = state => ({
-  item: state.profile,
+  category: state.category,
+  item: state.item,
+  location: state.location,
+  auth: state.auth,
   errors: state.errors
 });
 
 export default connect(
   mapStateToProps,
-  { addItem }
-)(withRouter(AddItem));
+  { addItem, getCategories, getLocations }
+)(AddItem);

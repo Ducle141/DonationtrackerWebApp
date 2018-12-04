@@ -5,11 +5,13 @@ import profileReducer from './profileReducer';
 
 import locationReducer from './locationReducer';
 import itemReducer from './itemReducer';
+import categoryReducer from './categoryReducer';
 
 export default combineReducers({
   auth: authReducer,
   errors: errorReducer,
   profile: profileReducer,
   location: locationReducer,
-  item: itemReducer
+  item: itemReducer,
+  category: categoryReducer
 });

@@ -6,21 +6,20 @@ import {
   CLEAR_ERRORS,
   GET_ITEM,
   GET_ITEMS,
-  ITEM_LOADING
+  GET_CATEGORIES,
+  ITEM_LOADING,
+  CATEGORY_LOADING
   // DELETE_POST
 } from './types';
 
 // Add Item
-export const addItem = itemData => dispatch => {
+export const addItem = (itemData, history) => dispatch => {
   dispatch(clearErrors());
+  console.log('itemActions');
+  console.log(itemData);
   axios
-    .post('/api/items', itemData)
-    .then(res =>
-      dispatch({
-        type: ADD_ITEM,
-        payload: res.data
-      })
-    )
+    .post('/api/items/create', itemData)
+    .then(res => history.push('/dashboard'))
     .catch(err =>
       dispatch({
         type: GET_ERRORS,
@@ -43,8 +42,8 @@ export const getItems = () => dispatch => {
     )
     .catch(err =>
       dispatch({
-        type: GET_ITEMS,
-        payload: null
+        type: GET_ERRORS,
+        payload: err.response.data
       })
     );
 };
@@ -63,12 +62,31 @@ export const getItem = id => dispatch => {
     )
     .catch(err =>
       dispatch({
-        type: GET_ITEM,
-        payload: null
+        type: GET_ERRORS,
+        payload: err.response.data
       })
     );
 };
 
+// Get All Categories
+export const getCategories = () => dispatch => {
+  console.log('action get All Categories');
+  dispatch(setCategoryLoading());
+  axios
+    .get('/api/categories')
+    .then(res =>
+      dispatch({
+        type: GET_CATEGORIES,
+        payload: res.data
+      })
+    )
+    .catch(err =>
+      dispatch({
+        type: GET_ERRORS,
+        payload: err.response.data
+      })
+    );
+};
 // // Get Post
 // export const getPost = id => dispatch => {
 //   dispatch(setPostLoading());
@@ -110,6 +128,13 @@ export const getItem = id => dispatch => {
 export const setItemLoading = () => {
   return {
     type: ITEM_LOADING
+  };
+};
+
+// Set loading state
+export const setCategoryLoading = () => {
+  return {
+    type: CATEGORY_LOADING
   };
 };
 
