@@ -4,7 +4,7 @@ img {
 
 .landing {
   position: relative;
-  background: url("./img/wallpaper.jpg") no-repeat;
+  background: url('./img/wallpaper.jpg') no-repeat;
   background-size: cover;
   background-position: center;
   height: 100vh;
@@ -15,7 +15,6 @@ img {
 .landing-inner {
   padding-top: 80px;
 }
-
 
 .card-form {
   opacity: 0.9;
@@ -30,8 +29,6 @@ img {
   color: #bbb !important;
 }
 
-
-html *
-{
-   font-family: "Gill Sans", sans-serif;
+html * {
+  font-family: 'Gill Sans', sans-serif;
 }
