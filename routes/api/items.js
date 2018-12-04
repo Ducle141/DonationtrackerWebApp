@@ -15,10 +15,10 @@ const validateItemInput = require('../../validation/item');
 // @access  Public
 router.get('/test', (req, res) => res.json({ msg: 'Items Works' }));
 
-// @route   GET api/categories
+// @route   GET api/items/categories
 // @desc    Get categories
 // @access  Public
-router.get('/', (req, res) => {
+router.get('/categories', (req, res) => {
   console.log('get Categories backend');
   Category.find()
     .sort({ date: -1 })

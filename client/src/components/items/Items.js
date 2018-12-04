@@ -23,8 +23,8 @@ class Items extends Component {
   render() {
     console.log('rederinggg---------------');
     console.log(this.props.item);
-    const { loading } = this.props.item;
-    const items = this.props.item.item;
+    const { items, loading } = this.props.item;
+    // const items = this.props.item.item;
     let itemContent;
     console.log(items);
     if (items === null || loading || items === undefined) {

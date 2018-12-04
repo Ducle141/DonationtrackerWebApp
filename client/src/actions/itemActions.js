@@ -73,7 +73,7 @@ export const getCategories = () => dispatch => {
   console.log('action get All Categories');
   dispatch(setCategoryLoading());
   axios
-    .get('/api/categories')
+    .get('/api/items/categories')
     .then(res =>
       dispatch({
         type: GET_CATEGORIES,
