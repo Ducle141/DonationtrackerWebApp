@@ -62,7 +62,20 @@ class Dashboard extends Component {
         </div>
       );
     } else {
-      userContent = <Locations />;
+      userContent = (
+        <div className="btn-group mb-4" role="group">
+          <div className="col-md-12">
+            <div className="row">
+              <Locations />
+            </div>
+            <div className="row">
+              {locations !== null && locations !== undefined ? (
+                <LocationsMapContainer locations={locations} />
+              ) : null}
+            </div>
+          </div>
+        </div>
+      );
     }
 
     return (

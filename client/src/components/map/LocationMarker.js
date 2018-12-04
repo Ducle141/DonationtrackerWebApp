@@ -20,6 +20,7 @@ export default class LocationMarker extends React.Component {
     this.setState({
       isOpen: false
     });
+    this.props.handleCloseCall;
   };
 
   render() {
@@ -32,7 +33,7 @@ export default class LocationMarker extends React.Component {
         onClick={() => this.handleToggleOpen()}
       >
         {this.state.isOpen && (
-          <InfoWindow onCloseClick={this.props.handleCloseCall}>
+          <InfoWindow onCloseClick={this.props.handleToggleClose}>
             <div>
               <h3>{this.props.title}</h3>
               <h4>Address: {this.props.address}</h4>
