@@ -22,8 +22,8 @@ router.get('/', (req, res) => {
   Item.find()
     .sort({ date: -1 })
     .then(items => {
+      console.log(JSON.stringify(items));
       res.json(items);
-      console.log(items);
     })
     .catch(err => res.status(404).json({ noitemsfound: 'No items found' }));
 });
@@ -32,10 +32,18 @@ router.get('/', (req, res) => {
 // @desc    Get item by id
 // @access  Public
 router.get('/:id', (req, res) => {
+
   // console.log('get with', req.params.id);
   let result;
   Item.find({ locationS: req.params.id })
     .then(items => {
+
+  console.log('get with certain ID', req.params.id);
+
+  Item.find({ locationS: req.params.id })
+    .then(items => {
+      console.log("PASSING BACK THE ITEM")
+      console.log(items);
       res.json(items);
     })
     .catch(err =>
